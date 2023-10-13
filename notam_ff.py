@@ -90,9 +90,7 @@ if b_2:
     chrome_options.add_experimental_option('excludeSwitches', exp_opt)
     prefs = {'profile.default_content_setting_values.notifications':1}
     chrome_options.add_experimental_option('prefs', prefs)
-    s = Service('C:\\chromedriver.exe')
-    driver = webdriver.Chrome(service = s,
-                              options = chrome_options)
+    driver = get_driver()
     driver.get('https://drones.enaire.es/')
     
     wdec('body > div.cookiefirst-root.notranslate > div > div > div.cfAdwL.cf7ddU > div.cf2L3T.cfysV4.cf2mE1 > div.cf3Tgk.cf2pAE.cfAdwL.cf1IKf > div.cf1lHZ.cf2L3T > button').click()
