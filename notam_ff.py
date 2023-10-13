@@ -4,6 +4,7 @@ Created on Wed Oct 11 12:20:21 2023
 
 @author: dsanm
 """
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service
@@ -21,7 +22,7 @@ base_id = st.secrets['at_base_id']
 table_name = 'vuelos_programados_notam'
 headers_AT = {"Authorization" : f"Bearer {api_key}",  "Content-Type" : 'application/json' }
 endpoint_AT = f'https://api.airtable.com/v0/{base_id}/{table_name}'
-
+@st.cache_resource
 def get_driver():
     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
@@ -64,13 +65,9 @@ if b_1:
     wdec('#widgets_Splash_Widget_30 > div.envelope > div:nth-child(2) > div.footer > div.jimu-btn.jimu-float-trailing.enable-btn').click()
     wdec('#scrollPreguntas > div:nth-child(2) > div.pregunta_respuesta.w3-col.s10.l6 > div > div > div:nth-child(2) > div').click()
     wdec('#esri_dijit_Search_0_input').send_keys('ciudad deportiva andres iniesta', Keys.ENTER)
-    
     wdec('#widgets_CustomInfoClick_Widget_43 > div.esriPopup > div > div > a').click()
     wdec('#widgets_CustomInfoClick_Widget_43 > div.esriPopup > div > div > a').click()
-    
     wdec('#widgets_CustomInfoClick_Widget_43_panel > div.title.jimu-panel-title.jimu-main-background > div.close-icon.jimu-float-trailing').click()
-    #punto = driver.find_element(By.ID, "map_graphics_layer")
-    #punto.click()
     wdec('#map_graphics_layer').click()
     wdec('#popupContent > div.AisosAlertas > div.mensajeDrones.NOTAM')
     alerts = dfe('#popupContent > div.AisosAlertas > div.mensajeDrones.NOTAM')
