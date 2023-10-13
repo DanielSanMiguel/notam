@@ -11,6 +11,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as WD
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 import requests
 import pandas as pd
 import streamlit as st
@@ -21,6 +22,8 @@ table_name = 'vuelos_programados_notam'
 headers_AT = {"Authorization" : f"Bearer {api_key}",  "Content-Type" : 'application/json' }
 endpoint_AT = f'https://api.airtable.com/v0/{base_id}/{table_name}'
 
+def get_driver():
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
 def convert_to_dataframe(airtable_records):
     """Converts dictionary output from airtable_download() into a Pandas dataframe."""
@@ -54,9 +57,7 @@ if b_1:
     chrome_options.add_experimental_option('excludeSwitches', exp_opt)
     prefs = {'profile.default_content_setting_values.notifications':1}
     chrome_options.add_experimental_option('prefs', prefs)
-    s = Service('C:\\chromedriver.exe')
-    driver = webdriver.Chrome(service = s,
-                              options = chrome_options)
+    driver = get_driver()
     driver.get('https://drones.enaire.es/')
     
     wdec('body > div.cookiefirst-root.notranslate > div > div > div.cfAdwL.cf7ddU > div.cf2L3T.cfysV4.cf2mE1 > div.cf3Tgk.cf2pAE.cfAdwL.cf1IKf > div.cf1lHZ.cf2L3T > button').click()
