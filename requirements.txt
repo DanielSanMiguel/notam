@@ -1,3 +1,4 @@
 seleniumbase
 pandas
 webdriver-manager
+streamlit
