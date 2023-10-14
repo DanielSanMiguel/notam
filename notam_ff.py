@@ -17,6 +17,12 @@ import requests
 import pandas as pd
 import streamlit as st
 
+driver = webdriver.Chrome()
+driver.get("chrome://version/")
+version_element = driver.find_element_by_id("version")
+browser_version = version_element.text
+st.write(browser_version)
+
 api_key = st.secrets['at_token']
 base_id = st.secrets['at_base_id']
 table_name = 'vuelos_programados_notam'
