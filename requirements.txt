@@ -2,3 +2,4 @@ seleniumbase
 pandas
 webdriver-manager
 streamlit
+selenium
