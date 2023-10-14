@@ -22,7 +22,7 @@ base_id = st.secrets['at_base_id']
 table_name = 'vuelos_programados_notam'
 headers_AT = {"Authorization" : f"Bearer {api_key}",  "Content-Type" : 'application/json' }
 endpoint_AT = f'https://api.airtable.com/v0/{base_id}/{table_name}'
-@st.cache_data
+@st.cache_resource
 def get_driver():
     return webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=chrome_options)
 
