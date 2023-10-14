@@ -7,7 +7,7 @@ Created on Wed Oct 11 12:20:21 2023
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as WD
@@ -24,7 +24,7 @@ headers_AT = {"Authorization" : f"Bearer {api_key}",  "Content-Type" : 'applicat
 endpoint_AT = f'https://api.airtable.com/v0/{base_id}/{table_name}'
 @st.cache_resource
 def get_driver():
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    return webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=chrome_options)
 
 def convert_to_dataframe(airtable_records):
     """Converts dictionary output from airtable_download() into a Pandas dataframe."""
@@ -58,8 +58,7 @@ if b_1:
     chrome_options.add_experimental_option('excludeSwitches', exp_opt)
     prefs = {'profile.default_content_setting_values.notifications':1}
     chrome_options.add_experimental_option('prefs', prefs)
-    service = webdriver.ChromeService(executable_path="C:/chromedriver.exe")
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = get_driver()
     driver.get('https://drones.enaire.es/')
     
     wdec('body > div.cookiefirst-root.notranslate > div > div > div.cfAdwL.cf7ddU > div.cf2L3T.cfysV4.cf2mE1 > div.cf3Tgk.cf2pAE.cfAdwL.cf1IKf > div.cf1lHZ.cf2L3T > button').click()
@@ -88,8 +87,7 @@ if b_2:
     chrome_options.add_experimental_option('excludeSwitches', exp_opt)
     prefs = {'profile.default_content_setting_values.notifications':1}
     chrome_options.add_experimental_option('prefs', prefs)
-    service = webdriver.ChromeService(executable_path="C:/chromedriver.exe")
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = get_driver()
     driver.get('https://drones.enaire.es/')
     
     wdec('body > div.cookiefirst-root.notranslate > div > div > div.cfAdwL.cf7ddU > div.cf2L3T.cfysV4.cf2mE1 > div.cf3Tgk.cf2pAE.cfAdwL.cf1IKf > div.cf1lHZ.cf2L3T > button').click()
